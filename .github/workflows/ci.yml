@@ -10,6 +10,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: java-assignment
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,10 +24,10 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: maven
+          cache-dependency-path: java-assignment/pom.xml
 
       - name: Make Maven Wrapper executable
         run: chmod +x mvnw
 
       - name: Run tests and verify coverage
         run: ./mvnw clean verify
-
